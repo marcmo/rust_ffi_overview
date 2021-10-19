@@ -3,7 +3,8 @@ use std::mem;
 extern "C" fn callback(ptr: *mut u8, len: usize, cap: usize) {
     println!("Rust: got back vector, free {} bytes of memory", cap);
     unsafe {
-        let _ = Vec::from_raw_parts(ptr, len, cap);
+        let v = Vec::from_raw_parts(ptr, len, cap);
+        println!("Rust: got back vector {:?}", v);
     }
 }
 
@@ -13,11 +14,14 @@ extern "C" {
 }
 
 fn main() {
-    let mut vec = vec![0u8, 1, 2];
-    let ptr: *mut u8 = vec.as_mut_ptr();
-    let len = vec.len();
-    let cap = vec.capacity(); //needed by rust compiler to free when we get ownership back
-    mem::forget(vec);
+    let (ptr, len, cap) = {
+        let mut vec = vec![0u8, 1, 2];
+        let ptr = vec.as_mut_ptr();
+        let len = vec.len();
+        let cap = vec.capacity(); //needed by rust compiler to free when we get ownership back
+        mem::forget(vec);
+        (ptr, len, cap)
+    }; // vec goes out of scope...will NOT be deallocated
     unsafe {
         register_callback(callback);
         fill_array(ptr, len, cap);

@@ -6,13 +6,6 @@ extern "C" {
     fn triple_input(input: libc::c_int) -> libc::c_int;
 }
 
-#[repr(C)]
-struct Data {
-    a: u32,
-    b: u16,
-    c: u64,
-}
-
 fn main() {
     let x = unsafe { triple_input(100) };
     println!("triple 100: {}", x);
