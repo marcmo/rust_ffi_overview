@@ -1,7 +1,7 @@
 use std::mem;
 
 extern "C" fn callback(ptr: *mut u8, len: usize, cap: usize) {
-    println!("Rust: got back vector, free {} bytes of memory", cap);
+    println!("Rust: need to free {} bytes of memory", cap);
     unsafe {
         let v = Vec::from_raw_parts(ptr, len, cap);
         println!("Rust: got back vector {:?}", v);
@@ -14,6 +14,7 @@ extern "C" {
 }
 
 fn main() {
+    println!("Rust: prepare input vector");
     let (ptr, len, cap) = {
         let mut vec = vec![0u8, 1, 2];
         let ptr = vec.as_mut_ptr();

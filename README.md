@@ -32,43 +32,38 @@ pub struct NativeStruct {
 
 ### Borrowing and Ownership
 
-let x = NativeStruct { ... }
+Managing memory is more complicated than in pure rust
 
-Transform ownership:
 ```rust
-let ptr = Box::into_raw(Box::new(x));
+let x = NativeStruct { ... }
+```
+
+#### Transform ownership
+
+```rust
 // this box has to be freed by hand
+let ptr = Box::into_raw(Box::new(x));
 ```
-Free memory:
+=> Free memory
 ```rust
-let _ Box::from_raw(ptr);
 // will be deallocated when out of scope
+let _ = Box::from_raw(ptr);
 ```
-Borrowing:
+
+#### Borrowing
+
 ```rust
+// convert rust reference to pointer
 let pointer: *const NativeStruct = &x;
 ```
 
 ### Sequences
 
+see `vector` example
+
 ```rust
 vec![42u32, 43u32];
 ```
-Borrowing:
-```rust
-let ptr = vec.as_ptr(); // Returns a raw pointer to the vector’s buffer
-let len = vec.len();
-```
-Transfering ownership (moving)
-```rust
-let ptr = vec.as_mut_ptr();
-let len = vec.len();
-let cap = vec.capacity(); //needed by rust compiler to free when we get ownership back
-mem::forget(vec); // transfer ownership outside, rust will not free the memory
-```
-Freeing memory:
-```rust
-#[no_mangle]```
 
 ## Using C code from Rust
 

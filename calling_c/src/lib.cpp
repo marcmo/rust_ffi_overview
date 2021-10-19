@@ -1,9 +1,9 @@
 #include <stdint.h>
-#include <stddef.h>
 #include <stdio.h>
 
 extern "C"
 int triple_input(int input) {
-  return input * 3;
+    printf("C: triple_input for %d\n", input);
+    return input * 3;
 }
 

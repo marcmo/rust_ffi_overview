@@ -11,5 +11,5 @@ fn triple(input: i32) -> i32 {
 }
 
 fn main() {
-    println!("triple 100: {}", triple(100));
+    println!("Rust: triple 100: {}", triple(100));
 }
