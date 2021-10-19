@@ -1,6 +1,7 @@
 
 #[no_mangle]
 pub extern "C" fn addition(a: u32, b: u32) -> u32 {
+    println!("RUST adding {} and {}", a, b);
     a + b
 }
 

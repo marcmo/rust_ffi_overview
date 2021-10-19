@@ -1,5 +1,7 @@
 # Rust FFI Basics
 
+## Using C code from Rust
+
 ## Add some rust to your code
 
 By default, any function you write in Rust will use the Rust ABI.
