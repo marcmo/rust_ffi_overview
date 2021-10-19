@@ -2,4 +2,5 @@
 members = [
     "calling_c",
     "calling_rust",
+    "vector",
 ]

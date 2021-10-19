@@ -6,6 +6,7 @@ version = 3
 name = "calling_c"
 version = "0.1.0"
 dependencies = [
+ "cc",
  "libc",
 ]
 
@@ -15,6 +16,12 @@ version = "0.1.0"
 dependencies = [
  "ferris-says",
 ]
+
+[[package]]
+name = "cc"
+version = "1.0.71"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "79c2681d6594606957bbb8631c4b90a7fcaaa72cdb714743a437b156d6a7eedd"
 
 [[package]]
 name = "ferris-says"
@@ -60,3 +67,11 @@ name = "unicode-width"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3ed742d4ea2bd1176e236172c8429aaf54486e7ac098db29ffe6529e0ce50973"
+
+[[package]]
+name = "vector"
+version = "0.1.0"
+dependencies = [
+ "cc",
+ "libc",
+]
