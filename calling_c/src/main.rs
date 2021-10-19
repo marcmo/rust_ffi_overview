@@ -1,14 +1,15 @@
 extern crate libc;
 
-#[link(name = "snappy")]
+use libc::c_int;
+
 extern "C" {
-    fn snappy_max_compressed_length(source_length: libc::size_t) -> libc::size_t;
-    fn triple_input(input: libc::c_int) -> libc::c_int;
+    fn triple_input(input: c_int) -> c_int;
+}
+
+fn triple(input: i32) -> i32 {
+    unsafe { triple_input(input) }
 }
 
 fn main() {
-    let x = unsafe { triple_input(100) };
-    println!("triple 100: {}", x);
-    let x = unsafe { snappy_max_compressed_length(100) };
-    println!("max compressed length of a 100 byte buffer: {}", x);
+    println!("triple 100: {}", triple(100));
 }

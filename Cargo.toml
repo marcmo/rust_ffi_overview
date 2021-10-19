@@ -2,5 +2,6 @@
 members = [
     "calling_c",
     "calling_rust",
+    "lib_wrapper",
     "vector",
 ]

@@ -35,6 +35,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "lib_wrapper"
+version = "0.1.0"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "libc"
 version = "0.2.104"
 source = "registry+https://github.com/rust-lang/crates.io-index"
