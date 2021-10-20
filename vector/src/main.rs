@@ -1,13 +1,16 @@
 use std::mem;
 
-extern "C" fn callback(ptr: *mut u8, len: usize, cap: usize) {
+// Rust API we offer
+extern "C" fn transfer_to_rust(ptr: *mut u8, len: usize, cap: usize) {
     println!("Rust: need to free {} bytes of memory", cap);
     unsafe {
         let v = Vec::from_raw_parts(ptr, len, cap);
         println!("Rust: got back vector {:?}", v);
     }
+    println!("Rust: memory of vector freed");
 }
 
+// C-API we use
 extern "C" {
     fn fill_array(ptr: *mut u8, len: usize, cap: usize);
     fn register_callback(cb: extern "C" fn(*mut u8, usize, usize)) -> i32;
@@ -24,7 +27,7 @@ fn main() {
         (ptr, len, cap)
     }; // vec goes out of scope...will NOT be deallocated
     unsafe {
-        register_callback(callback);
-        fill_array(ptr, len, cap);
+        register_callback(transfer_to_rust);
+        fill_array(ptr, len, cap); // transfer ownership
     }
 }

@@ -1,9 +1,9 @@
 mod say;
-use crate::say::sayit;
+use crate::say::log_it;
 
 #[no_mangle]
 pub extern "C" fn addition(a: u32, b: u32) -> u32 {
-    sayit(a, b);
+    log_it(a, b);
     a + b
 }
 

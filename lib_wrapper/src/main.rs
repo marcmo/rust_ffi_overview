@@ -49,7 +49,7 @@ pub fn compress(src: &[u8]) -> Vec<u8> {
 fn main() {
     let text = "aaaaaaaaaaaaabbbbbbbbbbbbbcccccccccccc".to_owned();
     let uncompressed = text.as_bytes();
-    let compressed = compress(uncompressed);
+    let compressed = compress(uncompressed); // call C-library-function
     println!(
         "compressed len={} vs. uncompressed len: {}) (compression ratio: {:.2}%)",
         compressed.len(),

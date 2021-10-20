@@ -2,12 +2,12 @@
 #include <stdio.h>
 
 typedef void (*rust_callback)(uint8_t*, size_t, size_t);
-rust_callback vec_free;
+rust_callback transfer_back;
 
 extern "C"
 int32_t register_callback(rust_callback callback) {
   printf("C: register callback\n");
-  vec_free = callback;
+  transfer_back = callback;
   return 1;
 }
 
@@ -18,5 +18,5 @@ void fill_array(uint8_t* ptr, size_t len, size_t cap) {
         ptr[i] = i + 40;
     }
     printf("C: moving back array to rust\n");
-    vec_free(ptr, len, cap);
+    transfer_back(ptr, len, cap);
 }
